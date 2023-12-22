@@ -12,7 +12,7 @@ len_uniq <- function(x) {
 #' Modified Sum, Min, Max functions (written by Matthew Hendtlass)
 #'
 #' Applies operation with NAs removed; if the input is either not numeric or all
-#' \code{NA}, \code{modi_sum, modi_min, modi_max} return \code{NA_real_} and
+#' \code{NAs}, \code{modi_sum, modi_min, modi_max} return \code{NA_real_} and
 #' \code{min_length, max_length} return \code{0}.
 #' @param f an R function
 #' @param default default value

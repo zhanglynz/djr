@@ -33,6 +33,6 @@ A numeric vector of length 1
 }
 \description{
 Applies operation with NAs removed; if the input is either not numeric or all
-\code{NA}, \code{modi_sum, modi_min, modi_max} return \code{NA_real_} and
+\code{NAs}, \code{modi_sum, modi_min, modi_max} return \code{NA_real_} and
 \code{min_length, max_length} return \code{0}.
 }
