@@ -2,7 +2,7 @@
 % Please edit documentation in R/trim_spaces_in_df.R
 \name{my_trim_ws}
 \alias{my_trim_ws}
-\title{My Trim White Space}
+\title{Trim White Spaces}
 \usage{
 my_trim_ws(x)
 }
@@ -13,7 +13,7 @@ my_trim_ws(x)
 a vector---the input itself or after trimming
 }
 \description{
-Get rid of spaces: no sapce at the begining and ending; leave only one space
+Get rid of spaces: no space at the beginning and ending; leave only one space
 between characters
 }
 \examples{

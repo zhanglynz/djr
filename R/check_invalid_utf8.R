@@ -3,7 +3,6 @@
 #' @param x a character vector
 #'
 #' @return a logical vector
-#' @importFrom stringi stri_enc_toutf8
 #' @export
 #'
 #' @examples
@@ -18,6 +17,7 @@ check_invalid_utf8 <- function(x){
 #' @param x a character vector
 #'
 #' @return a character vector
+#' @importFrom stringi stri_enc_toutf8
 #' @export
 #'
 #' @examples

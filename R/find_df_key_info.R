@@ -37,5 +37,6 @@ find_df_key_info <- function(a_df)
                               numeric(1)),
               sample_values = base::I(a_sample),
               stringsAsFactors = FALSE)
+ row.names(re_df) <- NULL
  return(re_df)
 }

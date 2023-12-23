@@ -1,6 +1,6 @@
-#' My Trim White Space
+#' Trim White Spaces
 #'
-#' Get rid of spaces: no sapce at the begining and ending; leave only one space
+#' Get rid of spaces: no space at the beginning and ending; leave only one space
 #' between characters
 #' @param x a vector
 #'

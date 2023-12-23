@@ -18,8 +18,8 @@
 #' )
 #' new_df <- get_col_sums_added(a_df = my_df)
 get_col_sums_added <- function(a_df, first_col_is_label = TRUE)
-{col_sums <- unlist(lapply(a_df, modi_sum))
- wk_df <- rbind(a_df, col_sums)
+{col_sums <- base::unlist(lapply(a_df, modi_sum))
+ wk_df <- base::rbind(a_df, col_sums)
  if(first_col_is_label) {
    wk_df[, 1] <- as.character(wk_df[, 1])
    wk_df[nrow(wk_df), 1] <- "Total"
