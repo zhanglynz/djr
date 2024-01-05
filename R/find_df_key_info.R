@@ -40,3 +40,34 @@ find_df_key_info <- function(a_df)
  row.names(re_df) <- NULL
  return(re_df)
 }
+
+
+#' Find Key Info of a Table in Database
+#'
+#' @param db_con database connection
+#' @param tbl_name table's name
+#'
+#' @return a dataframe
+#' @export
+#'
+db_tbl_key_info <- function(db_con, tbl_name)
+{query <- sprintf("select * from %s", tbl_name)
+ df <- DBI::dbGetQuery(db_con, query)
+ DBI::dbDisconnect(db_con)
+ info_df <- find_df_key_info(df)
+ return(info_df)
+}
+
+
+#' Find Names of Tables in Database
+#'
+#' @param db_con database connection
+#'
+#' @return a vector
+#' @export
+#'
+db_tbl_names <- function(db_con)
+{the_names <- DBI::dbListTables(db_con)
+ DBI::dbDisconnect(db_con)
+ return(the_names)
+}

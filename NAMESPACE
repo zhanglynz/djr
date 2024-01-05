@@ -2,6 +2,8 @@
 
 export(check_invalid_utf8)
 export(convert_to_utf8)
+export(db_tbl_key_info)
+export(db_tbl_names)
 export(find_df_key_info)
 export(get_col_sums_added)
 export(len_uniq)
