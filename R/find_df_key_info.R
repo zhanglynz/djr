@@ -24,9 +24,9 @@ find_df_key_info <- function(a_df)
    data.frame(var_name = names(a_df),
               var_type = vapply(a_df, typeof, character(1)),
               var_class = vapply(a_df, class, character(1)),
-              no_of_rows = dim(a_df)[1],
-              no_of_unique_rows = vapply(a_df, len_uniq, numeric(1)),
-              no_of_NAs = vapply(a_df, function(x) sum(is.na(x)), numeric(1)),
+              nbr_of_rows = dim(a_df)[1],
+              nbr_of_unique_rows = vapply(a_df, len_uniq, numeric(1)),
+              nbr_of_NAs = vapply(a_df, function(x) sum(is.na(x)), numeric(1)),
               the_min = vapply(a_df, modi_min, numeric(1)),
               the_max = vapply(a_df, modi_max, numeric(1)),
               width_min =
@@ -51,8 +51,9 @@ find_df_key_info <- function(a_df)
 #' @export
 #'
 db_tbl_key_info <- function(db_con, tbl_name)
-{query <- sprintf("select * from %s", tbl_name)
- df <- DBI::dbGetQuery(db_con, query)
+{# query <- sprintf("select * from %s", tbl_name)
+ # df <- DBI::dbGetQuery(db_con, query)
+ df <- DBI::dbReadTable(db_con, tbl_name)
  DBI::dbDisconnect(db_con)
  info_df <- find_df_key_info(df)
  return(info_df)
