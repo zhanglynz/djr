@@ -46,14 +46,48 @@ find_df_key_info <- function(a_df)
 #'
 #' @param db_con database connection
 #' @param tbl_name table's name
-#'
+#' @param big_tbl_threshold a number, default is 1e6
+#' @param db_system, default is 'duckdb' can also be 'MS-SQL'
 #' @return a dataframe
 #' @export
 #'
-db_tbl_key_info <- function(db_con, tbl_name)
-{# query <- sprintf("select * from %s", tbl_name)
- # df <- DBI::dbGetQuery(db_con, query)
- df <- DBI::dbReadTable(db_con, tbl_name)
+db_tbl_key_info <- function(db_con,
+                            tbl_name,
+                            big_tbl_threshold = 1e6,
+                            db_system = 'duckdb')
+{# column names and number of columns
+ all_vars <- DBI::dbListFields(conn = db_con, name = tbl_name)
+ col_nbr <- length(all_vars)
+
+ # number of rows
+ query <- sprintf("select count(1) as n from %s", tbl_name)
+ a_df <- DBI::dbGetQuery(db_con, query)
+ row_nbr <- a_df$n
+
+ v <- col_nbr * row_nbr
+
+ if(v < big_tbl_threshold) {
+   df <- DBI::dbReadTable(db_con, tbl_name)
+   DBI::dbDisconnect(db_con)
+   info_df <- find_df_key_info(df)
+   return(info_df)
+ }
+
+ sampled_rows <- min(10000, row_nbr)
+ cat(sprintf("\n IMPORTANT: A big table, having %d rows;
+            the returned info is based on sampled %s rows.\n", row_nbr,
+             sampled_rows))
+
+ db_system <- match.arg(db_system, c("duckdb", "MS-SQL"))
+ if(db_system == 'duckdb') {
+   query <- sprintf("SELECT * FROM %s
+                    ORDER BY RANDOM() LIMIT %d", tbl_name, sampled_rows)
+   } else if(db_system == 'MS-SQL') {
+   query <- sprintf("SELECT top %d * FROM %s
+                    ORDER BY NEWID()", sampled_rows, tbl_name)
+   }
+
+ df <- DBI::dbGetQuery(db_con, query)
  DBI::dbDisconnect(db_con)
  info_df <- find_df_key_info(df)
  return(info_df)

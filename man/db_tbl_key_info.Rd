@@ -4,12 +4,21 @@
 \alias{db_tbl_key_info}
 \title{Find Key Info of a Table in Database}
 \usage{
-db_tbl_key_info(db_con, tbl_name)
+db_tbl_key_info(
+  db_con,
+  tbl_name,
+  big_tbl_threshold = 1e+06,
+  db_system = "duckdb"
+)
 }
 \arguments{
 \item{db_con}{database connection}
 
 \item{tbl_name}{table's name}
+
+\item{big_tbl_threshold}{a number, default is 1e6}
+
+\item{db_system, }{default is 'duckdb' can also be 'MS-SQL'}
 }
 \value{
 a dataframe
