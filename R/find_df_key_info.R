@@ -74,9 +74,11 @@ db_tbl_key_info <- function(db_con,
  }
 
  sampled_rows <- min(10000, row_nbr)
- cat(sprintf("\n IMPORTANT: A big table, having %d rows;
-            the returned info is based on sampled %s rows.\n", row_nbr,
-             sampled_rows))
+ cat(sprintf("\n IMPORTANT: A big table, having %d rows and %d columns;
+            the returned info is based on sampled %s rows.\n",
+            row_nbr,
+            col_nbr,
+            sampled_rows))
 
  db_system <- match.arg(db_system, c("duckdb", "MS-SQL"))
  if(db_system == 'duckdb') {
