@@ -68,7 +68,7 @@ db_tbl_key_info <- function(db_con,
 
  if(v < big_tbl_threshold) {
    df <- DBI::dbReadTable(db_con, tbl_name)
-   DBI::dbDisconnect(db_con)
+   DBI::dbDisconnect(db_con, shutdown = TRUE)
    info_df <- find_df_key_info(df)
    return(info_df)
  }
@@ -90,7 +90,7 @@ db_tbl_key_info <- function(db_con,
    }
 
  df <- DBI::dbGetQuery(db_con, query)
- DBI::dbDisconnect(db_con)
+ DBI::dbDisconnect(db_con, shutdown = TRUE)
  info_df <- find_df_key_info(df)
  return(info_df)
 }
@@ -105,6 +105,6 @@ db_tbl_key_info <- function(db_con,
 #'
 db_tbl_names <- function(db_con)
 {the_names <- DBI::dbListTables(db_con)
- DBI::dbDisconnect(db_con)
+ DBI::dbDisconnect(db_con, shutdown = TRUE)
  return(the_names)
 }
